@@ -24,6 +24,9 @@ public class Tarefa {
 	@Column(name = "concluido")
 	private boolean concluido = false;
 
+	public Tarefa() {
+	}
+
 	public Tarefa(String titulo, String descricao) {
 		this.titulo = titulo;
 		this.descricao = descricao;

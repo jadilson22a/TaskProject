@@ -38,16 +38,34 @@ public class TarefaService {
 			throw new RuntimeException("Tarefa não encontrada!");
 		}
 	}
-	
-	public List<TarefaDTO> buscaID(Integer id){
-		List<TarefaDTO> tarefas = new ArrayList<>();
-		tarefas.add(repository.findById(id).orElse(null).toDTO());
-		return tarefas;
+
+	public TarefaDTO buscarPorId(Integer id) {
+		return repository.findById(id)
+				.map(Tarefa::toDTO)
+				.orElseThrow(() -> new RuntimeException("Tarefa não encontrada!"));
 	}
 	
 	public List<TarefaDTO> buscarCondicao(boolean concluido){
 		List<Tarefa> tarefasEncontradas = repository.findByConcluido(concluido);
 		List<TarefaDTO> tarefasDTO = tarefasEncontradas.stream().map(x -> x.toDTO()).toList();
 		return tarefasDTO;
+	}
+
+	public List<TarefaDTO> buscarTodos(){
+		List<Tarefa> tarefasEncontradas = repository.findAll();
+		List<TarefaDTO> tarefasDTO = tarefasEncontradas.stream().map(x -> x.toDTO()).toList();
+		return tarefasDTO;
+	}
+
+	public void concluir(Integer id) {
+		Optional<Tarefa> tarefa = repository.findById(id);
+
+		if (tarefa.isPresent()) {
+			Tarefa entidade = tarefa.get();
+			entidade.setConcluido(true);
+			repository.save(entidade);
+		} else {
+			throw new RuntimeException("Tarefa não encontrada!");
+		}
 	}
 }

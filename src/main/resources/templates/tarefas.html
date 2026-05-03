@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lista de Tarefas</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { border: 1px solid #ccc; padding: 0.75rem; text-align: left; }
+        th { background: #f4f4f4; }
+        .empty { color: #555; margin-top: 1rem; }
+        .status-true { color: green; font-weight: bold; }
+        .status-false { color: #a00; font-weight: bold; }
+        .new-task-button { display: inline-block; margin-top: 1rem; padding: 0.6rem 1rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; }
+        .new-task-button:hover { background: #0056b3; }
+        .update-button { display: inline-block; padding: 0.4rem 0.75rem; background: #28a745; color: white; text-decoration: none; border-radius: 4px; }
+        .update-button:hover { background: #218838; }
+    </style>
+</head>
+<body>
+    <h1>Lista de Tarefas</h1>
+    <a class="new-task-button" th:href="@{/tarefas/novo}">Nova Tarefa</a>
+
+    <div th:if="${tarefas.empty}" class="empty">
+        Nenhuma tarefa encontrada.
+    </div>
+
+    <table th:if="${not #lists.isEmpty(tarefas)}">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Descrição</th>
+                <th>Concluída</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tarefa : ${tarefas}">
+                <td th:text="${tarefa.id}">1</td>
+                <td th:text="${tarefa.titulo}">Título</td>
+                <td th:text="${tarefa.descricao}">Descrição</td>
+                <td>
+                    <div th:if="${tarefa.concluido}">
+                        <input type="checkbox" disabled="disabled" checked="checked" />
+                    </div>
+                    <form th:if="${!tarefa.concluido}" th:action="@{/tarefas/concluir}" method="post">
+                        <input type="hidden" name="id" th:value="${tarefa.id}" />
+                        <input type="checkbox" onchange="this.form.submit()" />
+                    </form>
+                </td>
+                <td>
+                    <a class="update-button" th:href="@{/tarefas/editar/{id}(id=${tarefa.id})}">Atualizar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

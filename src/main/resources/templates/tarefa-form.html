@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Cadastrar Tarefa</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; }
+        form { max-width: 640px; }
+        label { display: block; margin-top: 1rem; font-weight: bold; }
+        input[type="text"], textarea { width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px; }
+        .checkbox-field { margin-top: 1rem; }
+        .actions { margin-top: 1.5rem; }
+        button { padding: 0.75rem 1.25rem; border: none; background: #007bff; color: white; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .link-back { display: inline-block; margin-top: 1.25rem; color: #007bff; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <h1 th:text="${formTitle}">Criar nova tarefa</h1>
+
+    <form th:action="@{${formAction}}" th:object="${tarefaDTO}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <input type="hidden" th:field="*{concluido}" />
+
+        <label for="titulo">Título</label>
+        <input id="titulo" type="text" th:field="*{titulo}" placeholder="Digite o título" required />
+
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" th:field="*{descricao}" rows="4" placeholder="Digite a descrição"></textarea>
+
+        <input type="hidden" th:field="*{concluido}" />
+
+        <div class="actions">
+            <button type="submit">Salvar tarefa</button>
+        </div>
+    </form>
+
+    <a class="link-back" th:href="@{/tarefas}">Voltar à lista de tarefas</a>
+</body>
+</html>
