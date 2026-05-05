@@ -31,6 +31,7 @@
                 <th>ID</th>
                 <th>Título</th>
                 <th>Descrição</th>
+                <th>Prazo</th>
                 <th>Concluída</th>
                 <th>Ações</th>
             </tr>
@@ -40,6 +41,7 @@
                 <td th:text="${tarefa.id}">1</td>
                 <td th:text="${tarefa.titulo}">Título</td>
                 <td th:text="${tarefa.descricao}">Descrição</td>
+                <td th:text="${#temporals.format(tarefa.prazo, 'dd/MM/yyyy')}">Prazo</td>
                 <td>
                     <div th:if="${tarefa.concluido}">
                         <input type="checkbox" disabled="disabled" checked="checked" />

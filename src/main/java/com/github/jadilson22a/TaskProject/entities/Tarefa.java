@@ -1,5 +1,7 @@
 package com.github.jadilson22a.TaskProject.entities;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,16 +26,20 @@ public class Tarefa {
 	@Column(name = "concluido")
 	private boolean concluido = false;
 
+	@Column(name = "prazo")
+	private LocalDate prazo;
+
 	public Tarefa() {
 	}
 
-	public Tarefa(String titulo, String descricao) {
+	public Tarefa(String titulo, String descricao, LocalDate prazo) {
 		this.titulo = titulo;
 		this.descricao = descricao;
+		this.prazo = prazo;
 	}
 	
 	public TarefaDTO toDTO() {
-		return new TarefaDTO(this.id, this.titulo, this.descricao, this.concluido);
+		return new TarefaDTO(this.id, this.titulo, this.descricao, this.concluido, this.prazo);
 	}
 
 	public Integer getId() {
@@ -46,6 +52,10 @@ public class Tarefa {
 
 	public String getTitulo() {
 		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 	public String getDescricao() {
@@ -62,6 +72,14 @@ public class Tarefa {
 
 	public void setConcluido(boolean concluido) {
 		this.concluido = concluido;
+	}
+
+	public LocalDate getPrazo() {
+		return prazo;
+	}
+
+	public void setPrazo(LocalDate prazo) {
+		this.prazo = prazo;
 	}
 
 	

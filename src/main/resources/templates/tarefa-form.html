@@ -7,7 +7,7 @@
         body { font-family: Arial, sans-serif; margin: 2rem; }
         form { max-width: 640px; }
         label { display: block; margin-top: 1rem; font-weight: bold; }
-        input[type="text"], textarea { width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px; }
+        input[type="text"], input[type="date"], textarea { width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px; }
         .checkbox-field { margin-top: 1rem; }
         .actions { margin-top: 1.5rem; }
         button { padding: 0.75rem 1.25rem; border: none; background: #007bff; color: white; border-radius: 4px; cursor: pointer; }
@@ -28,7 +28,8 @@
         <label for="descricao">Descrição</label>
         <textarea id="descricao" th:field="*{descricao}" rows="4" placeholder="Digite a descrição"></textarea>
 
-        <input type="hidden" th:field="*{concluido}" />
+        <label for="prazo">Prazo</label>
+        <input id="prazo" type="date" th:field="*{prazo}" />
 
         <div class="actions">
             <button type="submit">Salvar tarefa</button>

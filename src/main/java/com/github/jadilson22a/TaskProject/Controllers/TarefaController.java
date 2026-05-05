@@ -25,7 +25,7 @@ public class TarefaController {
 	//Controladores de templates
 	@GetMapping("/novo")
 	public String novoFormulario(Model model) {
-		model.addAttribute("tarefaDTO", new TarefaDTO(null, "", "", false));
+		model.addAttribute("tarefaDTO", new TarefaDTO(null, "", "", false,null));
 		model.addAttribute("formAction", "/tarefas/salvar");
 		model.addAttribute("formTitle", "Cadastrar nova tarefa");
 		return "tarefa-form";
