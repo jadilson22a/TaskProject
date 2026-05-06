@@ -7,6 +7,7 @@
         body { font-family: Arial, sans-serif; margin: 2rem; }
         table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
         th, td { border: 1px solid #ccc; padding: 0.75rem; text-align: left; }
+        .narrow-col { width: 80px; padding: 0.5rem; text-align: center; }
         th { background: #f4f4f4; }
         .empty { color: #555; margin-top: 1rem; }
         .status-true { color: green; font-weight: bold; }
@@ -28,21 +29,23 @@
     <table th:if="${not #lists.isEmpty(tarefas)}">
         <thead>
             <tr>
-                <th>ID</th>
+                <th class="narrow-col">ID</th>
                 <th>Título</th>
                 <th>Descrição</th>
-                <th>Prazo</th>
-                <th>Concluída</th>
-                <th>Ações</th>
+                <th class="narrow-col">Prazo</th>
+                <th class="narrow-col">Prioridade</th>
+                <th class="narrow-col">Concluída</th>
+                <th class="narrow-col">Ações</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="tarefa : ${tarefas}">
-                <td th:text="${tarefa.id}">1</td>
+                <td class="narrow-col" th:text="${tarefa.id}">1</td>
                 <td th:text="${tarefa.titulo}">Título</td>
                 <td th:text="${tarefa.descricao}">Descrição</td>
-                <td th:text="${#temporals.format(tarefa.prazo, 'dd/MM/yyyy')}">Prazo</td>
-                <td>
+                <td class="narrow-col" th:text="${#temporals.format(tarefa.prazo, 'dd/MM/yyyy')}">Prazo</td>
+                <td class="narrow-col" th:text="${tarefa.prioridade}">Prioridade</td>
+                <td class="narrow-col">
                     <div th:if="${tarefa.concluido}">
                         <input type="checkbox" disabled="disabled" checked="checked" />
                     </div>
@@ -51,7 +54,7 @@
                         <input type="checkbox" onchange="this.form.submit()" />
                     </form>
                 </td>
-                <td>
+                <td class="narrow-col">
                     <a class="update-button" th:href="@{/tarefas/editar/{id}(id=${tarefa.id})}">Atualizar</a>
                 </td>
             </tr>

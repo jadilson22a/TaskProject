@@ -1,6 +1,5 @@
 package com.github.jadilson22a.TaskProject.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +22,19 @@ public class TarefaService {
 	}
 	
 	public TarefaDTO atualizar(Integer id, TarefaDTO dto) {
-		Tarefa tarefa = dto.toTarefa();
-		tarefa.setId(id);
-		Tarefa tarefaSalva = repository.save(tarefa);
-		return tarefaSalva.toDTO();
+			Optional<Tarefa> tarefaExistente = repository.findById(id);
+		
+		if (tarefaExistente.isPresent()) {
+			Tarefa tarefa = tarefaExistente.get();
+			tarefa.setTitulo(dto.getTitulo());
+			tarefa.setDescricao(dto.getDescricao());
+			tarefa.setPrazo(dto.getPrazo());
+			tarefa.setPrioridade(dto.getPrioridade());
+			Tarefa tarefaSalva = repository.save(tarefa);
+			return tarefaSalva.toDTO();
+		} else {
+			throw new RuntimeException("Tarefa não encontrada!");
+		}
 	}
 	
 	public void deletar(Integer id) {

@@ -7,7 +7,7 @@
         body { font-family: Arial, sans-serif; margin: 2rem; }
         form { max-width: 640px; }
         label { display: block; margin-top: 1rem; font-weight: bold; }
-        input[type="text"], input[type="date"], textarea { width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px; }
+        input[type="text"], input[type="date"], textarea, select { width: 100%; padding: 0.6rem; border: 1px solid #ccc; border-radius: 4px; }
         .checkbox-field { margin-top: 1rem; }
         .actions { margin-top: 1.5rem; }
         button { padding: 0.75rem 1.25rem; border: none; background: #007bff; color: white; border-radius: 4px; cursor: pointer; }
@@ -30,6 +30,11 @@
 
         <label for="prazo">Prazo</label>
         <input id="prazo" type="date" th:field="*{prazo}" />
+
+        <label for="prioridade">Prioridade</label>
+        <select id="prioridade" th:field="*{prioridade}">
+            <option th:each="p : ${T(com.github.jadilson22a.TaskProject.entities.Prioridade).values()}" th:value="${p}" th:text="${p.name()}"></option>
+        </select>
 
         <div class="actions">
             <button type="submit">Salvar tarefa</button>

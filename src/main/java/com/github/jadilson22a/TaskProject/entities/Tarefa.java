@@ -29,17 +29,21 @@ public class Tarefa {
 	@Column(name = "prazo")
 	private LocalDate prazo;
 
+	@Column(name = "prioridade")
+	private Prioridade prioridade;
+
 	public Tarefa() {
 	}
 
-	public Tarefa(String titulo, String descricao, LocalDate prazo) {
+	public Tarefa(String titulo, String descricao, LocalDate prazo, Prioridade prioridade) {
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.prazo = prazo;
+		this.prioridade = prioridade;
 	}
 	
 	public TarefaDTO toDTO() {
-		return new TarefaDTO(this.id, this.titulo, this.descricao, this.concluido, this.prazo);
+		return new TarefaDTO(this.id, this.titulo, this.descricao, this.concluido, this.prazo, this.prioridade);
 	}
 
 	public Integer getId() {
@@ -80,6 +84,14 @@ public class Tarefa {
 
 	public void setPrazo(LocalDate prazo) {
 		this.prazo = prazo;
+	}
+
+	public Prioridade getPrioridade() {
+		return prioridade;
+	}
+
+	public void setPrioridade(Prioridade prioridade) {
+		this.prioridade = prioridade;
 	}
 
 	
